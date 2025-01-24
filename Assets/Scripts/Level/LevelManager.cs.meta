@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 303ad5fde49e1dc4aad8dd79e086fb60
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _scoresText: {instanceID: 0}
+  - _inGameTimer: {instanceID: 0}
+  - _audioMixer: {fileID: 24100000, guid: 18282b0a1ad446b458424d16477a1f98, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
