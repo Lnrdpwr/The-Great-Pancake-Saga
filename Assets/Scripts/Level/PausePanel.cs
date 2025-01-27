@@ -21,6 +21,9 @@ public class PausePanel : MonoBehaviour
 
     public void Pause()
     {
+        _canvasGroup.blocksRaycasts = true;
+        _canvasGroup.interactable = true;
+
         _canvasGroup.alpha = 1;
         Time.timeScale = 0;
         _jamThrower?.LockThrow();
@@ -28,6 +31,9 @@ public class PausePanel : MonoBehaviour
 
     public void UnPause()
     {
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.interactable = false;
+
         _canvasGroup.alpha = 0;
         Time.timeScale = 1;
         _jamThrower?.UnlockThrow();
@@ -39,5 +45,9 @@ public class PausePanel : MonoBehaviour
         PlayerMovement.Instance.Death();
     }
 
-    public void UnblockRaycast() => _canvasGroup.blocksRaycasts = false;
+    public void UnblockRaycast()
+    {
+        _canvasGroup.blocksRaycasts = false;
+        _canvasGroup.interactable = false;
+    }
 }

@@ -75,7 +75,7 @@ public class ResultPanel : MonoBehaviour
         _bestScore.text = $"Best score: {bestScore}";
         _bestTime.text = string.Format("Best time: {0:00}:{1:00}:{2:00}", minutes, seconds, miliseconds);
 
-        if (score != 0)
+        if (score != 0)     
             StartCoroutine(StarsAppearr(score));
     }
 

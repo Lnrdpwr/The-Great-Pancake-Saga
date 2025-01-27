@@ -1352,7 +1352,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 8
-      m_TileSpriteIndex: 8
+      m_TileSpriteIndex: 10
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1422,7 +1422,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 6
-      m_TileSpriteIndex: 6
+      m_TileSpriteIndex: 9
       m_TileMatrixIndex: 0
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -1915,16 +1915,16 @@ Tilemap:
     m_Data: {fileID: 157683463, guid: 685b4272b779b71479004af7fb1985cf, type: 3}
   - m_RefCount: 24
     m_Data: {fileID: 1255353345, guid: 685b4272b779b71479004af7fb1985cf, type: 3}
-  - m_RefCount: 1
-    m_Data: {fileID: -1857548055, guid: 685b4272b779b71479004af7fb1985cf, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 32
     m_Data: {fileID: -987399399, guid: 685b4272b779b71479004af7fb1985cf, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 1
+    m_Data: {fileID: -1857548055, guid: 685b4272b779b71479004af7fb1985cf, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1252983110, guid: 685b4272b779b71479004af7fb1985cf, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 67
     m_Data:
@@ -2183,9 +2183,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!19719996 &744823776
 TilemapCollider2D:
@@ -5151,9 +5151,9 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!19719996 &1134478558
 TilemapCollider2D:
