@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip _banger;
+    [SerializeField] public AudioClip _banger;
 
     private AudioSource _source;
 
