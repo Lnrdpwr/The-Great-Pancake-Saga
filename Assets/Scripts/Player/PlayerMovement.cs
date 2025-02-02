@@ -225,7 +225,7 @@ public class PlayerMovement : MonoBehaviour
         Instantiate(_deathEffect, transform.position, Quaternion.identity);
     }
 
-    private bool OnGround() => Physics2D.OverlapCircle(_groundCheck.position, 0.265f, _groundLayer);
+    private bool OnGround() => Physics2D.OverlapCircle(_groundCheck.position, 0.33f, _groundLayer);
 
     IEnumerator Dash()
     {

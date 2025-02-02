@@ -20,7 +20,7 @@ public class Jam : MonoBehaviour
 
     private Rigidbody2D _rigidbody;
     private SpriteRenderer _renderer;
-    private bool _invularable = true;
+    private bool _invularable = false;
 
     private void Start()
     {
@@ -30,7 +30,6 @@ public class Jam : MonoBehaviour
         _rigidbody.velocity = transform.right * _speed;
         _rigidbody.AddTorque(Random.Range(-360, 360));
 
-        Invoke("SetOffInvularability", _invularableTime);
         Destroy(gameObject, 7);
     }
 
