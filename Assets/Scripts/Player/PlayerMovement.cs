@@ -226,7 +226,7 @@ public class PlayerMovement : MonoBehaviour
         PlayerPrefs.SetInt("Deaths", PlayerPrefs.GetInt("Deaths", 0) + 1);
     }
 
-    private bool OnGround() => Physics2D.OverlapCircle(_groundCheck.position, 0.33f, _groundLayer);
+    private bool OnGround() => Physics2D.OverlapCircle(_groundCheck.position, 0.38f, _groundLayer);
 
     IEnumerator Dash()
     {

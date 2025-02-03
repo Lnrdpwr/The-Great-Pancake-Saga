@@ -10,6 +10,8 @@ public class SettingsMenu : MonoBehaviour
     [SerializeField] private Slider _soundSlider;
     [SerializeField] private Slider _musicSlider;
 
+    private CanvasGroup _canvasGroup;
+
     private void Start()
     {
         float soundVolume = PlayerPrefs.GetFloat("SoundVolume", -10f);
@@ -22,8 +24,6 @@ public class SettingsMenu : MonoBehaviour
 
         _audioMixer.SetFloat("SoundVolume", soundVolume);
         _audioMixer.SetFloat("MusicVolume", musicVolume);
-
-        gameObject.SetActive(false);
     }
 
     public void SetAllSettings()
