@@ -47,7 +47,7 @@ public class Jam : MonoBehaviour
         if (_rigidbody.velocity.y > 0 && collision.CompareTag("Ground"))
         {
             _invularable = true;
-            Invoke("SetOffInvularability", 0.7f);
+            Invoke("SetOffInvularability", 0.85f);
             return;
         }
 

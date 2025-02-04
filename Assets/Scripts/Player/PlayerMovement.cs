@@ -183,6 +183,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void ForcedMove(Vector2 direction, float force, float lockTime = 0.1f)
     {
+        if (!_canMove) return;
+
         _canMove = false;
         Invoke("UnlockMovement", lockTime);
 
@@ -216,6 +218,8 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.gravityScale = 0;
         _rigidbody.isKinematic = true;
+
+        JamThrower.Instance.LockThrow(true);
 
         _playerAudio.PlayOneShot(_deathSound);
 

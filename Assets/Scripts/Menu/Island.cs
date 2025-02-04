@@ -21,15 +21,28 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     [SerializeField] private Color _hoverTextColor = Color.white;
     [SerializeField] private float _colorChangeSpeed = 5f;
 
+    [Header("Animation Settings")]
+    [SerializeField] private float _zoomDuration = 1f;
+    [SerializeField] private float _zoomScale = 3f;
+    [SerializeField] private float _bounceHeight = 10f;
+    [SerializeField] private float _bounceSpeed = 2f;
+
     private TMP_Text _islandText;
     private Vector3 _originalScale;
     private bool _isHovered;
     private Color _normalTextColor;
+    private CanvasGroup _islandsCanvasGroup;
+    private CanvasGroup _levelButtonsCanvasGroup;
+    private Vector3 _originalPosition;
+    private bool _isBouncing = true;
 
     private void Awake()
     {
         _originalScale = transform.localScale;
         _islandText = GetComponentInChildren<TMP_Text>();
+
+        _islandsCanvasGroup = _islandsParent.GetComponent<CanvasGroup>();
+        _levelButtonsCanvasGroup = _levelButtonsPanel.GetComponent<CanvasGroup>();
 
         for (int i = 0; i < _levelButtons.Length; i++)
         {
@@ -38,6 +51,10 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
         }
 
         _normalTextColor = _islandText.color;
+
+        _levelButtonsPanel.transform.localScale = Vector3.zero;
+        _levelButtonsCanvasGroup.alpha = 0;
+        _originalPosition = transform.localPosition;
     }
 
     private void Update()
@@ -64,6 +81,17 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             _isHovered ? _hoverTextColor : _normalTextColor,
             _colorChangeSpeed * Time.deltaTime
         );
+
+        if (_isBouncing)
+        {
+            BounceIsland();
+        }
+    }
+
+    private void BounceIsland()
+    {
+        float bounce = Mathf.Sin(Time.time * _bounceSpeed) * _bounceHeight;
+        //transform.position = _originalPosition + new Vector3(0, bounce, 0);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -78,8 +106,71 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        StartZoomAnimation();
+    }
+
+    private void StartZoomAnimation()
+    {
+        _isBouncing = false;
+
+        Vector3 centerPosition = GetCenterPosition();
+        LeanTween.move(gameObject, centerPosition, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+
+        LeanTween.scale(gameObject, _originalScale * _zoomScale, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+
+        LeanTween.alphaCanvas(_islandsCanvasGroup, 0, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setOnComplete(() =>
+            {
+                _islandsParent.SetActive(false);
+                _isBouncing = true;
+            });
+
         _levelButtonsPanel.SetActive(true);
-        _islandsParent.SetActive(false);
+        LeanTween.scale(_levelButtonsPanel, Vector3.one, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+
+        LeanTween.alphaCanvas(_levelButtonsCanvasGroup, 1, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    private void OnBackButtonClicked()
+    {
+        LeanTween.scale(_levelButtonsPanel, Vector3.zero, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+
+        LeanTween.alphaCanvas(_levelButtonsCanvasGroup, 0, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setOnComplete(() =>
+            {
+                _levelButtonsPanel.SetActive(false);
+            });
+
+        _isBouncing = false;
+        _islandsParent.SetActive(true);
+
+        LeanTween.moveLocal(gameObject, _originalPosition, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad)
+            .setOnComplete(() =>
+            {
+                _isBouncing = true;
+                _isHovered = false;
+            });
+
+        LeanTween.alphaCanvas(_islandsCanvasGroup, 1, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+
+        LeanTween.scale(gameObject, _originalScale, _zoomDuration)
+            .setEase(LeanTweenType.easeOutQuad);
+    }
+
+    private Vector3 GetCenterPosition()
+    {
+        Vector3 center = Camera.main.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0));
+        center.z = transform.position.z;
+        return center;
     }
 
     private void LoadLevel(int levelIndex)
