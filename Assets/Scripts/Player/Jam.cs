@@ -55,7 +55,7 @@ public class Jam : MonoBehaviour
         if (player != null)
         {
             Vector2 dir = player.transform.position - transform.position;
-            player.GetComponent<PlayerMovement>().ForcedMove(dir, _explosionForce);
+            player.GetComponent<PlayerMovement>().ForcedMove(dir, _explosionForce, 0);
         }
 
         _jamAudio.PlayOneShot(_explosionSound);

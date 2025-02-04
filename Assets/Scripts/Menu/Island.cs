@@ -175,6 +175,9 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     private void LoadLevel(int levelIndex)
     {
-        SceneManager.LoadScene(levelIndex);
+        Pattern pattern = Pattern.Instance;
+
+        pattern.AppearEndEvent.AddListener(() => SceneManager.LoadScene($"Level{levelIndex+1}"));
+        pattern.Appear();
     }
 }

@@ -107,7 +107,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   _explosionRadius: 2.5
-  _explosionForce: 1500
+  _explosionForce: 1250
   _explosionSound: {fileID: 8300000, guid: 293aabecce5fcd544ae9e2f16decf6ae, type: 3}
 --- !u!50 &4349682105841340466
 Rigidbody2D:

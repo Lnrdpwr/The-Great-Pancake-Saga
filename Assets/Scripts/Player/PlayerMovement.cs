@@ -219,7 +219,8 @@ public class PlayerMovement : MonoBehaviour
         _rigidbody.gravityScale = 0;
         _rigidbody.isKinematic = true;
 
-        JamThrower.Instance.LockThrow(true);
+        if(JamThrower.Instance != null)
+            JamThrower.Instance.LockThrow(true);
 
         _playerAudio.PlayOneShot(_deathSound);
 
