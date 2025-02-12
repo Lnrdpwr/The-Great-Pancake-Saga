@@ -34,6 +34,7 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private CanvasGroup _islandsCanvasGroup;
     private CanvasGroup _levelButtonsCanvasGroup;
     private Vector3 _originalPosition;
+    private Vector3 _originalLocalPosition;
     private bool _isBouncing = true;
 
     private void Awake()
@@ -50,11 +51,11 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             _levelButtons[i].onClick.AddListener(() => LoadLevel(levelIndex));
         }
 
+        _originalPosition = transform.position;
+        _originalLocalPosition = transform.localPosition;
         _normalTextColor = _islandText.color;
-
         _levelButtonsPanel.transform.localScale = Vector3.zero;
         _levelButtonsCanvasGroup.alpha = 0;
-        _originalPosition = transform.localPosition;
     }
 
     private void Update()
@@ -91,7 +92,7 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     private void BounceIsland()
     {
         float bounce = Mathf.Sin(Time.time * _bounceSpeed) * _bounceHeight;
-        //transform.position = _originalPosition + new Vector3(0, bounce, 0);
+        transform.localPosition = _originalLocalPosition + new Vector3(0, bounce, 0);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -111,6 +112,9 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     private void StartZoomAnimation()
     {
+        _islandsCanvasGroup.interactable = false;
+        _islandsCanvasGroup.blocksRaycasts = false;
+
         _isBouncing = false;
 
         Vector3 centerPosition = GetCenterPosition();
@@ -125,7 +129,8 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             .setOnComplete(() =>
             {
                 _islandsParent.SetActive(false);
-                _isBouncing = true;
+                _levelButtonsCanvasGroup.interactable = true;
+                _levelButtonsCanvasGroup.blocksRaycasts = true;
             });
 
         _levelButtonsPanel.SetActive(true);
@@ -138,6 +143,9 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     private void OnBackButtonClicked()
     {
+        _levelButtonsCanvasGroup.interactable = false;
+        _levelButtonsCanvasGroup.blocksRaycasts = false;
+
         LeanTween.scale(_levelButtonsPanel, Vector3.zero, _zoomDuration)
             .setEase(LeanTweenType.easeOutQuad);
 
@@ -148,15 +156,16 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
                 _levelButtonsPanel.SetActive(false);
             });
 
-        _isBouncing = false;
         _islandsParent.SetActive(true);
 
-        LeanTween.moveLocal(gameObject, _originalPosition, _zoomDuration)
+        LeanTween.moveLocal(gameObject, _originalLocalPosition, _zoomDuration)
             .setEase(LeanTweenType.easeOutQuad)
             .setOnComplete(() =>
             {
                 _isBouncing = true;
                 _isHovered = false;
+                _islandsCanvasGroup.interactable = true;
+                _islandsCanvasGroup.blocksRaycasts = true;
             });
 
         LeanTween.alphaCanvas(_islandsCanvasGroup, 1, _zoomDuration)

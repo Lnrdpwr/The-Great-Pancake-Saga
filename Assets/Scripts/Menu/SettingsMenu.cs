@@ -20,8 +20,6 @@ public class SettingsMenu : MonoBehaviour
         _soundSlider.value = Mathf.Pow(10, soundVolume / 20);
         _musicSlider.value = Mathf.Pow(10, soundVolume / 20);
 
-        Debug.Log(soundVolume);
-
         _audioMixer.SetFloat("SoundVolume", soundVolume);
         _audioMixer.SetFloat("MusicVolume", musicVolume);
     }

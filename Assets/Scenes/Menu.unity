@@ -3042,7 +3042,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 112, y: 16}
+  m_AnchoredPosition: {x: 120, y: 16}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1215312296
@@ -3065,7 +3065,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: v2.0 by FishCup
+  m_text: 0.2.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b5f9568a960898846bf1d61f89f69971, type: 2}
   m_sharedMaterial: {fileID: 1963017598919120605, guid: b5f9568a960898846bf1d61f89f69971, type: 2}
@@ -3099,7 +3099,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
