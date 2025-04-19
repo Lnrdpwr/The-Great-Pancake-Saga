@@ -102,7 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _effects: {fileID: 8976901363821469865, guid: d1830a4c8d793b74fae923c9817cefc4, type: 3}
   _speed: 15
-  _invularableTime: 0.025
+  _invularableTime: 0.0075
   _playerLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -124,7 +124,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 4
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

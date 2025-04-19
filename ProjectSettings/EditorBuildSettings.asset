@@ -12,21 +12,30 @@ EditorBuildSettings:
     path: Assets/Scenes/LevelChoice.unity
     guid: ede958da33e7d2047a71a951afd7130c
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Greenlans/Level1.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Level2.unity
+    path: Assets/Scenes/Greenlans/Level2.unity
+    guid: 8f188fba8b4fad143a005c573bf1c2bd
+  - enabled: 1
+    path: Assets/Scenes/Greenlans/Level3.unity
     guid: 945369a1d7979114292a1772bb201036
   - enabled: 1
-    path: Assets/Scenes/Level3.unity
+    path: Assets/Scenes/Greenlans/Level4.unity
+    guid: 616d99026627caa499b1fa8b6e152778
+  - enabled: 1
+    path: Assets/Scenes/Greenlans/Level5.unity
     guid: d53d889450a7a544a87839f1c03b5e8b
   - enabled: 1
-    path: Assets/Scenes/Level4.unity
+    path: Assets/Scenes/Greenlans/Level6.unity
     guid: 156af84d8ab77ae42aa00f09fa88314b
   - enabled: 1
-    path: Assets/Scenes/Level5.unity
+    path: Assets/Scenes/Greenlans/Level7.unity
     guid: 5684c4c06b9f3d74494e7f86e8daf156
   - enabled: 1
-    path: Assets/Scenes/Level6.unity
+    path: Assets/Scenes/Greenlans/Level8.unity
     guid: 053efc532cad99e49b71f45a9616e036
+  - enabled: 1
+    path: Assets/Scenes/SandYards/Level9.unity
+    guid: abbd0bf0a0748444ebc3a4564e911c55
   m_configObjects: {}

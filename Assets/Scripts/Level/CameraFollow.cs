@@ -10,6 +10,11 @@ public class CameraFollow : MonoBehaviour
     private Vector3 _velocity;
     private bool _lookingDown = false;
 
+    private void Start()
+    {
+        transform.position = _target.position + _offset;
+    }
+
     private void LateUpdate()
     {
         if (Input.GetAxisRaw("Vertical") == -1)

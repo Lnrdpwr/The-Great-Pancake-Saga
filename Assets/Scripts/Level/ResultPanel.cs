@@ -41,6 +41,11 @@ public class ResultPanel : MonoBehaviour
 
     public void UpdatePanel(float time, int score)
     {
+        if (PlayerPrefs.GetInt("LevelPassed", 0) < _levelIndex)
+        {
+            PlayerPrefs.SetInt("LevelPassed", _levelIndex);
+        }
+
         _animator.SetTrigger("Appear");
 
         //Level result
@@ -92,6 +97,7 @@ public class ResultPanel : MonoBehaviour
 
     public void LoadMenu()
     {
+        FindObjectOfType<MusicManager>().Transition(null);
         LevelManager.Instance.LoadSceneByName("Menu");
     }
 

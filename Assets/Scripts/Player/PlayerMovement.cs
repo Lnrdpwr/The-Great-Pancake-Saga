@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -60,6 +61,11 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
     private bool _canMove = false;
 
+    private Collider2D _currentGround;
+    private Vector3 _currentGroundPosition;
+
+    public bool isOnGround => OnGround();
+
     internal static PlayerMovement Instance;
     private void Awake()
     {
@@ -78,9 +84,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+
         if (!_canMove) return;
 
-        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow)) && (OnGround() || _koyotTime > _koyotTimer) && !_isJumping)
+        if ((Input.GetKeyDown(KeyCode.UpArrow)) && (OnGround() || _koyotTime > _koyotTimer) && !_isJumping)
         {
             _koyotAvailable = false;
             _koyotTimer = _koyotTime;
@@ -90,7 +97,7 @@ public class PlayerMovement : MonoBehaviour
             _jumpTimer = 0;
             _playerAudio.PlayOneShot(_jumpSound);
         }
-        else if (Input.GetKeyUp(KeyCode.Space) || Input.GetKeyUp(KeyCode.UpArrow))
+        else if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             _koyotAvailable = false;
             _koyotTimer = _koyotTime;
@@ -114,7 +121,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (_koyotTimer < _koyotTime && !_koyotAvailable)
             _koyotTimer += Time.deltaTime;
-
     }
 
     private void FixedUpdate()
@@ -201,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetBool("isMoving", false);
         _animator.SetBool("isJumping", false);
         _animator.SetBool("isDashing", false);
-
+        
         if (_dashRoutine != null)
         {
             StopCoroutine(_dashRoutine);
@@ -209,7 +215,25 @@ public class PlayerMovement : MonoBehaviour
         }
 
         _canMove = false;
-        _rigidbody.velocity = new Vector2(0, _rigidbody.velocity.y);
+        
+    }
+
+    public void HidePlayer()
+    {
+        _animator.SetBool("isMoving", false);
+        _animator.SetBool("isJumping", false);
+        _animator.SetBool("isDashing", false);
+
+        _canMove = false;
+
+        if (_dashRoutine != null)
+        {
+            StopCoroutine(_dashRoutine);
+            _barGroup.alpha = 0;
+        }
+
+        Destroy(_rigidbody);
+        _animator.SetTrigger("HidePlayer");
     }
 
     public void Death()

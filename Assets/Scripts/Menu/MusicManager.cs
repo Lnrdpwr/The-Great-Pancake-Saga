@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class MusicManager : MonoBehaviour
 {
-    [SerializeField] public AudioClip _banger;
+    [SerializeField] public AudioClip _defaultTrack;
 
     private AudioSource _source;
+    private float _defaultVolume;
 
     private void Start()
     {
@@ -16,16 +17,35 @@ public class MusicManager : MonoBehaviour
         }
 
         _source = GetComponent<AudioSource>();
+        _defaultVolume = _source.volume;
         DontDestroyOnLoad(gameObject);
-        StartCoroutine(SkipTrack());
     }
 
-    IEnumerator SkipTrack()
+    public void Transition(AudioClip track)
     {
-        yield return new WaitWhile(()=> _source.isPlaying);
+        if (track == null)
+            track = _defaultTrack;
 
-        _source.clip = _banger;
+        StartCoroutine(TransitionRoutine(track));
+    }
+
+    IEnumerator TransitionRoutine(AudioClip track)
+    {
+        for(float i = 0; i < 1; i += Time.deltaTime)
+        {
+            _source.volume = Mathf.Lerp(1, 0, i);
+            yield return new WaitForEndOfFrame();
+        }
+
+        _source.clip = track;
         _source.Play();
-        _source.loop = true;
+
+        for (float i = 0; i < 1; i += Time.deltaTime)
+        {
+            _source.volume = i;
+            yield return new WaitForEndOfFrame();
+        }
+
+        _source.volume = _defaultVolume;
     }
 }

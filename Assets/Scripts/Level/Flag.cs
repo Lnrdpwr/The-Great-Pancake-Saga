@@ -23,7 +23,7 @@ public class Flag : MonoBehaviour
             jamThrower.LockThrow(true);
 
         LevelManager.Instance.LockKeyInput();
-        player.FreezePlayer();
+        player.HidePlayer();
         _effect.Play();
         _audioSource.PlayOneShot(_finishSound);
         _finished = true;

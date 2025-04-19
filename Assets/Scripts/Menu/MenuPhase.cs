@@ -32,7 +32,7 @@ public class MenuPhase : MonoBehaviour
             _light1.color = new Color(227, 208, 184, 255);
             _light2.intensity = 6.8f;
             _image.sprite = _phase2;
-            _musicManager._banger = _audio1;
+            _musicManager._defaultTrack = _audio1;
             _audioSource.clip = _audio1;
         }
         if (_deaths >= 50)
@@ -40,7 +40,7 @@ public class MenuPhase : MonoBehaviour
             _light1.color = new Color(186, 185, 185, 255);
             _light2.intensity = 3.8f;
             _image.sprite = _phase3;
-            _musicManager._banger = _audio2;
+            _musicManager._defaultTrack = _audio2;
             _audioSource.clip = _audio2;
             _button.SetActive(true);
         }
@@ -49,7 +49,7 @@ public class MenuPhase : MonoBehaviour
             _light1.color = new Color(255, 214, 161, 255);
             _image.sprite = _phase1;
             _light2.intensity = 10.8f;
-            _musicManager._banger = _default;
+            _musicManager._defaultTrack = _default;
             _audioSource.clip = _default;
             _button.SetActive(false);
         }

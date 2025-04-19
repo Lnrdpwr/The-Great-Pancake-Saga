@@ -1550,7 +1550,9 @@ TextureImporter:
       outline: []
       physicsShape:
       - - {x: -7.5, y: 9}
-        - {x: -7.5, y: 8}
+        - {x: -7.5, y: -9}
+        - {x: -6.5, y: -9}
+        - {x: -6.5, y: 8}
         - {x: 8.5, y: 8}
         - {x: 8.5, y: 9}
       tessellationDetail: 0
@@ -1576,7 +1578,9 @@ TextureImporter:
       physicsShape:
       - - {x: -8.5, y: 9}
         - {x: -8.5, y: 8}
-        - {x: 7.5, y: 8}
+        - {x: 6.5, y: 8}
+        - {x: 6.5, y: -9}
+        - {x: 7.5, y: -9}
         - {x: 7.5, y: 9}
       tessellationDetail: 0
       bones: []

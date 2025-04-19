@@ -63,7 +63,7 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
@@ -114,7 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _jam: {fileID: 1335840404858934258, guid: af27e0942fe4a8048a5345aa5c01316a, type: 3}
   _jamImage: {fileID: 0}
-  _reloadTime: 1
+  _reloadTime: 0.5
 --- !u!95 &6450815900829830550
 Animator:
   serializedVersion: 5

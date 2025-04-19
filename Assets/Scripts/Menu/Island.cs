@@ -7,8 +7,10 @@ using TMPro;
 public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     [Header("Island Settings")]
+    [SerializeField] private AudioClip _islandTheme;
     [SerializeField] private float _hoverScale = 1.1f;
     [SerializeField] private float _scaleSpeed = 5f;
+    [SerializeField] private int _firstLevelIndex;
 
     [Header("Level Buttons")]
     [SerializeField] private GameObject _levelButtonsPanel;
@@ -39,6 +41,9 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     private void Awake()
     {
+        int currentLevel = PlayerPrefs.GetInt("LevelPassed", 0)+1;
+        MusicManager musicManager = FindObjectOfType<MusicManager>();
+
         _originalScale = transform.localScale;
         _islandText = GetComponentInChildren<TMP_Text>();
 
@@ -47,8 +52,13 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
         for (int i = 0; i < _levelButtons.Length; i++)
         {
-            int levelIndex = i;
+            int levelIndex = i + _firstLevelIndex;
             _levelButtons[i].onClick.AddListener(() => LoadLevel(levelIndex));
+            _levelButtons[i].onClick.AddListener(() => musicManager.Transition(_islandTheme));
+
+            if(levelIndex > currentLevel) {
+                _levelButtons[i].interactable = false;
+            }
         }
 
         _originalPosition = transform.position;
@@ -141,7 +151,7 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
             .setEase(LeanTweenType.easeOutQuad);
     }
 
-    private void OnBackButtonClicked()
+    public void OnBackButtonClicked()
     {
         _levelButtonsCanvasGroup.interactable = false;
         _levelButtonsCanvasGroup.blocksRaycasts = false;
@@ -186,7 +196,7 @@ public class Island : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
     {
         Pattern pattern = Pattern.Instance;
 
-        pattern.AppearEndEvent.AddListener(() => SceneManager.LoadScene($"Level{levelIndex+1}"));
+        pattern.AppearEndEvent.AddListener(() => SceneManager.LoadScene($"Level{levelIndex}"));
         pattern.Appear();
     }
 }

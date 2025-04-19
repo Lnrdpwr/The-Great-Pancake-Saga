@@ -41,6 +41,8 @@ public class PausePanel : MonoBehaviour
 
     public void OpenMenu()
     {
+        FindObjectOfType<MusicManager>().Transition(null);
+
         LevelManager.Instance.LoadSceneByName("Menu");
         PlayerMovement.Instance.Death();
     }
